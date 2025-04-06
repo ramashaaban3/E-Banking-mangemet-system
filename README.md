@@ -1,1 +1,0 @@
-# E-Banking-mangemet-system
