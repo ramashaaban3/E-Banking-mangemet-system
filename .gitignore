@@ -1,0 +1,16 @@
+# Visual Studio dosyaları
+.vs/
+*.user
+*.suo
+
+# Derlenmiş dosyalar
+bin/
+obj/
+
+# NuGet paketleri
+packages/
+*.nupkg
+
+# Geçici dosyalar
+*.log
+*.tmp
