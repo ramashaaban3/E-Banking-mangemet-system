@@ -94,7 +94,8 @@ Veritabanına bağlanmak için App.config dosyasındaki bağlantı cümlesi gün
  UserDataAccess.InsertUser("Ali Veli", "aliveli", "1234");
  var users = UserDataAccess.GetAllUsers();
 
- Hazırlayan: Rama SHAABAN
+ Hazırlayan: Rama SHAABAN :)
+ 
 
  
 
