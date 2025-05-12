@@ -157,7 +157,45 @@ namespace BankDataAccess2.DataAccess
         }
 
 
+        //////
+        /////
+        ///
+        public static (string FullName, string Username, string Password) GetUserByUsername(string username)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string query = "SELECT FullName, Username, Password FROM Users WHERE Username = @Username";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Username", username);
 
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        string fullName = reader["FullName"].ToString();
+                        string userName = reader["Username"].ToString();
+                        string password = reader["Password"].ToString();
+                        return (fullName, userName, password);
+                    }
+
+                    reader.Close();
+                    return (null, null, null); // kullanıcı bulunamadı
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Kullanıcı adı ile arama hatası: " + ex.Message);
+                }
+            }
+        }
+
+
+
+        ///////
+        /////
+        ///
 
     }
 }

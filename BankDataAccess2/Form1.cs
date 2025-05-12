@@ -38,7 +38,7 @@ namespace BankDataAccess2
             //Yeni kullanıcı ekledikten sonra listeyi yenile
             try
             {
-                    UserDataAccess.InsertUser("Yeni Kullanıcı5", "yeniuser5", "1234");
+                    UserDataAccess.InsertUser("Yeni Kullanıcı6", "yeniuser6", "1234");
                     MessageBox.Show("Kullanıcı eklendi.");
 
                     // Listeyi güncelle
@@ -58,7 +58,7 @@ namespace BankDataAccess2
             try
             {
                     // Test amaçlı sabit değerlerle kullanıcı ekle
-                    UserDataAccess.InsertUser("Rama_Shaaban6", "rama_shaaban6", "1234");
+                    UserDataAccess.InsertUser("Rama_Shaaban7", "rama_shaaban7", "1234");
                     MessageBox.Show("Kullanıcı başarıyla eklendi.");
                 }
                 catch (Exception ex)
