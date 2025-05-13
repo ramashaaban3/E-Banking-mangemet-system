@@ -1,6 +1,6 @@
 ﻿namespace BankDataAccess2
 {
-    partial class Form2
+    partial class UserManagerTest
     {
         /// <summary>
         /// Required designer variable.
@@ -38,6 +38,7 @@
             this.btnRegister = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lstUsers = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -121,16 +122,26 @@
             // 
             this.lstUsers.FormattingEnabled = true;
             this.lstUsers.ItemHeight = 16;
-            this.lstUsers.Location = new System.Drawing.Point(228, 191);
+            this.lstUsers.Location = new System.Drawing.Point(369, 30);
             this.lstUsers.Name = "lstUsers";
-            this.lstUsers.Size = new System.Drawing.Size(127, 68);
+            this.lstUsers.Size = new System.Drawing.Size(253, 164);
             this.lstUsers.TabIndex = 9;
             // 
-            // Form2
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(27, 144);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(284, 16);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Şifre minimum 6 karakter uzunluğunda olmalıdır";
+            // 
+            // UserManagerTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.lstUsers);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnRegister);
@@ -141,9 +152,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.label1);
-            this.Name = "Form2";
+            this.Name = "UserManagerTest";
             this.Text = "Form2";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.Load += new System.EventHandler(this.UserManagerTest_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,5 +172,6 @@
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.ListBox lstUsers;
+        private System.Windows.Forms.Label label5;
     }
 }

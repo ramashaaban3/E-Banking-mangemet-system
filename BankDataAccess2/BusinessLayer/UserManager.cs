@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using BankDataAccess2.DataAccess;
+using BusinessLayer;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace BusinessLayer
 {
-    public static class UserManager
+    public class UserManager : IUserService
     {
-        public static bool Login(string fullName, string username, string password)
+        public bool Login(string fullName, string username, string password)
         {
             var user = UserDataAccess.GetUserByFullName(fullName);
 
@@ -21,28 +22,35 @@ namespace BusinessLayer
             return false;
         }
 
-        public static void Register(string fullName, string username, string password)
+        public void Register(string fullName, string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
                 throw new ArgumentException("Kullanıcı adı ve şifre boş olamaz.");
 
+            if (password.Length < 6)
+                throw new ArgumentException("Şifre en az 6 karakter olmalıdır.");
+
+            if (IsUsernameTaken(username))
+                throw new ArgumentException("Bu kullanıcı adı zaten kullanılıyor.");
+
             UserDataAccess.InsertUser(fullName, username, password);
         }
 
-        public static bool IsUsernameTaken(string username)
+
+        public bool IsUsernameTaken(string username)
         {
             var user = UserDataAccess.GetUserByUsername(username); // ✅ Doğru metot
             return user.Username != null;
         }
 
 
-        public static bool IsFullNameTaken(string fullName)
+        public bool IsFullNameTaken(string fullName)
         {
             var user = UserDataAccess.GetUserByFullName(fullName);
             return user.FullName != null;
         }
 
-        public static List<string> GetAllUsers()
+        public List<string> GetAllUsers()
         {
             return UserDataAccess.GetAllUsers();
         }
