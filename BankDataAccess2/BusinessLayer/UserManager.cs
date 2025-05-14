@@ -12,13 +12,19 @@ namespace BusinessLayer
         {
             var user = UserDataAccess.GetUserByFullName(fullName);
 
-            if (user.FullName == null) return false; // kullanıcı bulunamadıysa
+            if (user.FullName == null)
+            {
+                LogsDataAccess.InsertLog($"Giriş başarısız (kullanıcı bulunamadı): {username}");
+                return false;
+            }
 
             if (user.FullName == fullName && user.Username == username && user.Password == password)
             {
+                LogsDataAccess.InsertLog($"Giriş başarılı: {username}");
                 return true;
             }
 
+            LogsDataAccess.InsertLog($"Giriş başarısız (şifre hatalı): {username}");
             return false;
         }
 
@@ -34,6 +40,7 @@ namespace BusinessLayer
                 throw new ArgumentException("Bu kullanıcı adı zaten kullanılıyor.");
 
             UserDataAccess.InsertUser(fullName, username, password);
+            LogsDataAccess.InsertLog($"Yeni kullanıcı kaydı: {fullName} ({username})");
         }
 
 

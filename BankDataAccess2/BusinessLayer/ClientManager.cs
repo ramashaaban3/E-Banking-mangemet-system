@@ -4,35 +4,39 @@ using BankDataAccess2.DataAccess;
 
 namespace BusinessLayer
 {
-    public static class ClientManager
+    public class ClientManager : IClientService
     {
-        public static void AddClient(string fullName, string phoneNumber)
+        public void AddClient(string fullName, string phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(phoneNumber))
                 throw new ArgumentException("İsim ve telefon numarası boş olamaz.");
 
             ClientDataAccess.InsertClient(fullName, phoneNumber);
+            LogsDataAccess.InsertLog($"Müşteri eklendi: {fullName}, Tel: {phoneNumber}");
         }
 
-        public static List<string> GetAllClients()
+        public List<string> GetAllClients()
         {
             return ClientDataAccess.GetAllClients();
         }
 
-        public static void UpdateClient(string originalName, string newName, string newPhone)
+        public void UpdateClient(string originalName, string newName, string newPhone)
         {
             if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrWhiteSpace(newPhone))
                 throw new ArgumentException("Yeni bilgiler boş olamaz.");
 
             ClientDataAccess.UpdateClientByFullName(originalName, newName, newPhone);
+            LogsDataAccess.InsertLog($"Müşteri güncellendi: {originalName} → {newName}, Yeni Tel: {newPhone}");
         }
 
-        public static void DeleteClient(string fullName)
+
+        public void DeleteClient(string fullName)
         {
             if (string.IsNullOrWhiteSpace(fullName))
                 throw new ArgumentException("Silinecek isim boş olamaz.");
 
             ClientDataAccess.DeleteClientByFullName(fullName);
+            LogsDataAccess.InsertLog($"Müşteri silindi: {fullName}");
         }
     }
 }

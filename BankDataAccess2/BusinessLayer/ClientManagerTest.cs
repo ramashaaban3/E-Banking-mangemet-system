@@ -12,6 +12,7 @@ namespace BankDataAccess2
             this.Text = "ClientManager Test Arayüzü";
         }
 
+        private IClientService clientService = new ClientManager();
 
         private void lstClients_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -32,7 +33,7 @@ namespace BankDataAccess2
         {
             try
             {
-                ClientManager.AddClient(txtClientName.Text, txtPhone.Text);
+                clientService.AddClient(txtClientName.Text, txtPhone.Text);
                 MessageBox.Show("Müşteri eklendi.");
                 ClientManagerTest_Load_1(null, null);
             }
@@ -54,7 +55,7 @@ namespace BankDataAccess2
             string originalName = lstClients.SelectedItem.ToString();
             try
             {
-                ClientManager.UpdateClient(originalName, txtClientName.Text, txtPhone.Text);
+                clientService.UpdateClient(originalName, txtClientName.Text, txtPhone.Text);
                 MessageBox.Show("Müşteri güncellendi.");
                 ClientManagerTest_Load_1(null, null);
             }
@@ -76,7 +77,7 @@ namespace BankDataAccess2
             string selectedName = lstClients.SelectedItem.ToString();
             try
             {
-                ClientManager.DeleteClient(selectedName);
+                clientService.DeleteClient(selectedName);
                 MessageBox.Show("Müşteri silindi.");
                 ClientManagerTest_Load_1(null, null);
             }
@@ -90,7 +91,7 @@ namespace BankDataAccess2
         private void ClientManagerTest_Load_1(object sender, EventArgs e)
         {
             lstClients.Items.Clear();
-            var clients = ClientManager.GetAllClients(); // List<string>
+            var clients = clientService.GetAllClients(); // List<string>
             foreach (var c in clients)
             {
                 lstClients.Items.Add(c); // çünkü zaten string

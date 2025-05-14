@@ -4,9 +4,9 @@ using BankDataAccess2.DataAccess;
 
 namespace BusinessLayer
 {
-    public static class TransactionManager
+    public class TransactionManager : ITransactionService
     {
-        public static bool TransferMoney(int fromAccountId, int toAccountId, decimal amount)
+        public bool TransferMoney(int fromAccountId, int toAccountId, decimal amount)
         {
             if (amount <= 0)
                 throw new ArgumentException("Transfer edilecek miktar pozitif olmalıdır.");
@@ -32,7 +32,7 @@ namespace BusinessLayer
             }
         }
 
-        public static List<string> GetTransactionHistory(int accountId)
+        public List<string> GetTransactionHistory(int accountId)
         {
             return TransactionsDataAccess.GetTransactionsByAccountID(accountId);
         }

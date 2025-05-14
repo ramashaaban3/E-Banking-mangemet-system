@@ -51,6 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\AccountManager.cs" />
+    <Compile Include="BusinessLayer\AccountManagerTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessLayer\AccountManagerTest.Designer.cs">
+      <DependentUpon>AccountManagerTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="BusinessLayer\ClientManager.cs" />
     <Compile Include="BusinessLayer\ClientManagerTest.cs">
       <SubType>Form</SubType>
@@ -58,9 +64,18 @@
     <Compile Include="BusinessLayer\ClientManagerTest.Designer.cs">
       <DependentUpon>ClientManagerTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="BusinessLayer\IAService.cs" />
+    <Compile Include="BusinessLayer\ICService.cs" />
+    <Compile Include="BusinessLayer\ITService.cs" />
     <Compile Include="BusinessLayer\IUService.cs" />
     <Compile Include="BusinessLayer\LogManager.cs" />
     <Compile Include="BusinessLayer\TransactionManager.cs" />
+    <Compile Include="BusinessLayer\TransactionManagerTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessLayer\TransactionManagerTest.Designer.cs">
+      <DependentUpon>TransactionManagerTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="BusinessLayer\UserManager.cs" />
     <Compile Include="DataAccess\AccountDataAccess.cs" />
     <Compile Include="DataAccess\ClientDataAccess.cs" />
@@ -81,8 +96,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BusinessLayer\AccountManagerTest.resx">
+      <DependentUpon>AccountManagerTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BusinessLayer\ClientManagerTest.resx">
       <DependentUpon>ClientManagerTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessLayer\TransactionManagerTest.resx">
+      <DependentUpon>TransactionManagerTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -100,6 +121,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include=".editorconfig" />
+    <None Include="BusinessLayer\BusinessLayer_README.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankDataAccess2.BusinessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace BankDataAccess2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ClientManagerTest());
+            Application.Run(new AccountManagerTest());
         }
     }
 }
