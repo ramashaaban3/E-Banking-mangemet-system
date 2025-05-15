@@ -23,14 +23,14 @@ Kod, SQL Server veritabanı ile haberleşir ve aşağıdaki tablolar üzerinde t
 
 - Visual Studio 2019 veya 2022
 - .NET Framework 4.7.2
-- SQL Server (Express veya Developer Edition)
+- SQL Server (MSSQLLocalDB)
 - SQL Server Management Studio (SSMS) (tercihen)
 
 ---
 
 ## ⚙️ Veritabanı Kurulum Talimatları
 
-1. SQL Server'ı açın (örnek: `RAMASHAABAN\SQLEXPRESS` gibi)
+1. SQL Server'ı açın 
 2. SSMS (SQL Server Management Studio) üzerinden yeni bir veritabanı oluşturun:
    
 BankDB
@@ -43,7 +43,7 @@ sql```
 CREATE TABLE Users (
  UserID INT PRIMARY KEY IDENTITY(1,1),
  FullName NVARCHAR(100),
- Username NVARCHAR(50) UNIQUE,
+ Username NVARCHAR(50) ,
  Password NVARCHAR(50)
 );
 
@@ -76,15 +76,7 @@ CREATE TABLE Transactions (
 );
  </details>
 
-🔌 App.config Bağlantı Ayarı
-Veritabanına bağlanmak için App.config dosyasındaki bağlantı cümlesi güncellenmelidir:
 
-<connectionStrings>
-  <add name="BankDBConnection"
-       connectionString="Server=PC_ADINIZ\\SQLEXPRESS;Initial Catalog=BankDB;Integrated Security=True"
-       providerName="System.Data.SqlClient" />
-</connectionStrings>
-  Not: PC_ADINIZ\\SQLEXPRESS kısmını kendi bilgisayar adınıza göre düzenleyin.
 
   🧠 Kullanım
 -UserDataAccess, ClientDataAccess, AccountDataAccess, LogsDataAccess, TransactionsDataAccess sınıfları her tablo için ayrı ayrı veri erişimi sağlar.
