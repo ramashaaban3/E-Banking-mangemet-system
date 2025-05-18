@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BankDataAccess2.DataAccess;
+using BankDataAccess2.Entities;
 
 namespace BusinessLayer
 {
@@ -38,5 +39,13 @@ namespace BusinessLayer
             ClientDataAccess.DeleteClientByFullName(fullName);
             LogsDataAccess.InsertLog($"Müşteri silindi: {fullName}");
         }
+
+
+        public Client GetClientByName(string fullName)
+        {
+            return ClientDataAccess.GetClientByName(fullName);
+        }
+
+
     }
 }

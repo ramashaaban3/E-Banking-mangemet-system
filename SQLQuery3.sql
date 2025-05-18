@@ -1,0 +1,6 @@
+﻿USE BankDB;
+GO
+
+ALTER TABLE Clients ADD Address NVARCHAR(100) NULL;
+
+SELECT TOP 1 * FROM Clients;

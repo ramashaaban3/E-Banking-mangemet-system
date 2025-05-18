@@ -1,4 +1,5 @@
 ﻿using BankDataAccess2.BusinessLayer;
+using BankDataAccess2.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace BankDataAccess2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AccountManagerTest());
+            Application.Run(new LoginForm());
+
         }
     }
 }

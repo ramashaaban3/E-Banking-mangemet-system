@@ -77,11 +77,36 @@
       <DependentUpon>TransactionManagerTest.cs</DependentUpon>
     </Compile>
     <Compile Include="BusinessLayer\UserManager.cs" />
+    <Compile Include="ClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientForm.Designer.cs">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\AccountDataAccess.cs" />
     <Compile Include="DataAccess\ClientDataAccess.cs" />
     <Compile Include="DataAccess\LogsDataAccess.cs" />
     <Compile Include="DataAccess\TransactionsDataAccess.cs" />
     <Compile Include="DataAccess\UserDataAccess.cs" />
+    <Compile Include="Entities\AccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entities\AccountForm.Designer.cs">
+      <DependentUpon>AccountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entities\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entities\TransactionForm.Designer.cs">
+      <DependentUpon>TransactionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +129,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BusinessLayer\TransactionManagerTest.resx">
       <DependentUpon>TransactionManagerTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientForm.resx">
+      <DependentUpon>ClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entities\AccountForm.resx">
+      <DependentUpon>AccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entities\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entities\TransactionForm.resx">
+      <DependentUpon>TransactionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

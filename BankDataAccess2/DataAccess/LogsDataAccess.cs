@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
+using BankDataAccess2.Entities;
 
 namespace BankDataAccess2.DataAccess
 {
@@ -17,7 +18,7 @@ namespace BankDataAccess2.DataAccess
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                string query = "INSERT INTO Logs (Message) VALUES (@Message)";
+                string query = "INSERT INTO Logs (LogMessage) VALUES (@Message)";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Message", message);
 
@@ -65,7 +66,9 @@ namespace BankDataAccess2.DataAccess
             return logs;
         }
 
+
         
+
 
 
     }

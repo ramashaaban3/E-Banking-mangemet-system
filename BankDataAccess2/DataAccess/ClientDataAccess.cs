@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
+using BankDataAccess2.Entities;
 
 namespace BankDataAccess2.DataAccess
 {
@@ -104,6 +105,72 @@ namespace BankDataAccess2.DataAccess
             }
         }
 
+
+        public static (string FullName, string Phone) GetClientByFullName(string fullName)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string query = "SELECT FullName, Phone FROM Clients WHERE FullName = @FullName";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@FullName", fullName);
+
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        string foundName = reader["FullName"].ToString();
+                        string phone = reader["Phone"].ToString();
+                        return (foundName, phone);
+                    }
+                    else
+                    {
+                        return ("", ""); // Bulunamadı
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Müşteri bulunamadı: " + ex.Message);
+                }
+            }
+        }
+
+
+        public static Client GetClientByName(string fullName)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string query = "SELECT ClientID, FullName, Phone FROM Clients WHERE FullName = @FullName";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@FullName", fullName);
+
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        return new Client
+                        {
+                            ClientID = (int)reader["ClientID"],
+                            FullName = reader["FullName"].ToString(),
+                            Phone = reader["Phone"].ToString(),
+                        };
+                    }
+                    else
+                    {
+                        return new Client(); // boş nesne
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Müşteri aranırken hata oluştu: " + ex.Message);
+                }
+            }
+        }
 
     }
 }

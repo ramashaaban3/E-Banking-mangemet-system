@@ -1,0 +1,40 @@
+﻿USE BankDB;
+GO
+
+CREATE TABLE Clients (
+    ClientID INT IDENTITY(1,1) PRIMARY KEY,
+    FullName NVARCHAR(100) NOT NULL,
+    Phone NVARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Users (
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    Password NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Accounts (
+    AccountID INT IDENTITY(1,1) PRIMARY KEY,
+    ClientID INT NOT NULL,
+    Balance DECIMAL(18,2) NOT NULL DEFAULT 0,
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID)
+);
+
+
+CREATE TABLE Transactions (
+    TransactionID INT IDENTITY(1,1) PRIMARY KEY,
+    FromAccountID INT NOT NULL,
+    ToAccountID INT NOT NULL,
+    Amount DECIMAL(18,2) NOT NULL CHECK (Amount > 0),
+    TransactionDate DATETIME DEFAULT GETDATE(),
+
+    FOREIGN KEY (FromAccountID) REFERENCES Accounts(AccountID),
+    FOREIGN KEY (ToAccountID) REFERENCES Accounts(AccountID)
+);
+
+
+CREATE TABLE Logs (
+    LogID INT IDENTITY(1,1) PRIMARY KEY,
+    LogMessage NVARCHAR(255),
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
