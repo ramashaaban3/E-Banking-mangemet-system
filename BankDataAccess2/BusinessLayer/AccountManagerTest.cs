@@ -114,5 +114,31 @@ namespace BankDataAccess2.BusinessLayer
             }
 
         }
+
+        private void lstAccounts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstAccounts.SelectedItem != null)
+            {
+                try
+                {
+                    string selected = lstAccounts.SelectedItem.ToString();
+
+                    // Format: ID: 3, Müşteri: 2002, Bakiye: 676,00
+                    string[] parts = selected.Split(',');
+
+                    string accountIdPart = parts[0]; // ID: 3
+                    string clientIdPart = parts[1];  // Müşteri: 2002
+                    string balancePart = parts[2];  // Bakiye: 676,00
+
+                    txtAccountID.Text = accountIdPart.Split(':')[1].Trim();
+                    txtClientID.Text = clientIdPart.Split(':')[1].Trim();
+                    txtAmount.Text = balancePart.Split(':')[1].Trim();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Satırdan bilgi okunamadı.");
+                }
+            }
+        }
     }
 }

@@ -18,16 +18,26 @@ namespace BankDataAccess2
         {
             if (lstClients.SelectedItem != null)
             {
-                string selectedLine = lstClients.SelectedItem.ToString();
-                string[] parts = selectedLine.Split('-');
+                string selectedName = lstClients.SelectedItem.ToString();
 
-                if (parts.Length >= 2)
+                // Manager üzerinden veritabanından bilgileri al
+                var client = clientService.GetClientByName(selectedName);
+
+                if (client != null && !string.IsNullOrWhiteSpace(client.FullName))
                 {
-                    txtClientName.Text = parts[0].Trim();
-                    txtPhone.Text = parts[1].Trim();
+                    txtClientName.Text = client.FullName;
+                    txtPhone.Text = client.Phone;
+                }
+                else
+                {
+                    txtClientName.Clear();
+                    txtPhone.Clear();
                 }
             }
         }
+
+
+
 
         private void btnEkle_Click_1(object sender, EventArgs e)
         {

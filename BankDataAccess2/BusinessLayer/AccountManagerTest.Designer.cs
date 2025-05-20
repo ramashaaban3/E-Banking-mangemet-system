@@ -111,6 +111,7 @@
             this.lstAccounts.Name = "lstAccounts";
             this.lstAccounts.Size = new System.Drawing.Size(293, 180);
             this.lstAccounts.TabIndex = 8;
+            this.lstAccounts.SelectedIndexChanged += new System.EventHandler(this.lstAccounts_SelectedIndexChanged);
             // 
             // label1
             // 

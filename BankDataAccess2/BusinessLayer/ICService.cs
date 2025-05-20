@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BankDataAccess2.Entities;
+using System.Collections.Generic;
 
 namespace BusinessLayer
 {
@@ -8,5 +9,8 @@ namespace BusinessLayer
         void UpdateClient(string originalName, string newName, string newPhone);
         void DeleteClient(string clientName);
         List<string> GetAllClients();
+        Client GetClientByName(string fullName);
+
+
     }
 }
