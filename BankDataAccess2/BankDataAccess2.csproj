@@ -101,6 +101,18 @@
     <Compile Include="Entities\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entities\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entities\RegisterForm.Designer.cs">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entities\TransactionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +150,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Entities\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entities\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entities\RegisterForm.resx">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Entities\TransactionForm.resx">
       <DependentUpon>TransactionForm.cs</DependentUpon>
