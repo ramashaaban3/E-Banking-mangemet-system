@@ -80,7 +80,10 @@ namespace BankDataAccess2.DataAccess
                 try
                 {
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    int affected = cmd.ExecuteNonQuery();
+
+                    if (affected == 0)
+                        throw new Exception("Hesap bulunamadı."); // EKLENDİ
                 }
                 catch (Exception ex)
                 {
@@ -88,23 +91,40 @@ namespace BankDataAccess2.DataAccess
                 }
             }
         }
+
         // Para Çekme
         public static void Withdraw(int accountID, decimal amount)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                string query = "UPDATE Accounts SET Balance = Balance - @Amount WHERE AccountID = @AccountID AND Balance >= @Amount";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Amount", amount);
-                cmd.Parameters.AddWithValue("@AccountID", accountID);
+                string checkQuery = "SELECT Balance FROM Accounts WHERE AccountID = @AccountID";
+                string updateQuery = "UPDATE Accounts SET Balance = Balance - @Amount WHERE AccountID = @AccountID";
+
+                SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                checkCmd.Parameters.AddWithValue("@AccountID", accountID);
+
+                SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                updateCmd.Parameters.AddWithValue("@AccountID", accountID);
+                updateCmd.Parameters.AddWithValue("@Amount", amount);
 
                 try
                 {
                     conn.Open();
-                    int affected = cmd.ExecuteNonQuery();
+
+                    object result = checkCmd.ExecuteScalar();
+
+                    if (result == null)
+                        throw new Exception("Hesap bulunamadı.");
+
+                    decimal currentBalance = Convert.ToDecimal(result);
+
+                    if (currentBalance < amount)
+                        throw new Exception("Yetersiz bakiye.");
+
+                    int affected = updateCmd.ExecuteNonQuery();
 
                     if (affected == 0)
-                        throw new Exception("Yetersiz bakiye veya hesap bulunamadı.");
+                        throw new Exception("Bilinmeyen hata oluştu.");
                 }
                 catch (Exception ex)
                 {
@@ -112,6 +132,7 @@ namespace BankDataAccess2.DataAccess
                 }
             }
         }
+
 
         // Hesap Silme 
         public static void DeleteAccount(int accountID)
@@ -125,7 +146,10 @@ namespace BankDataAccess2.DataAccess
                 try
                 {
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    int affected = cmd.ExecuteNonQuery();
+
+                    if (affected == 0)
+                        throw new Exception("Hesap bulunamadı."); // EKLENDİ
                 }
                 catch (Exception ex)
                 {
@@ -133,6 +157,7 @@ namespace BankDataAccess2.DataAccess
                 }
             }
         }
+
 
 
 

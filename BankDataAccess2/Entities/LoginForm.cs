@@ -57,5 +57,10 @@ namespace BankDataAccess2.Entities
 
 
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

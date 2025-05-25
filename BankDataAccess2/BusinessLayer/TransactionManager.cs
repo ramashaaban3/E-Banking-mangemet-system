@@ -1,36 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using BankDataAccess2.DataAccess;
 
 namespace BusinessLayer
 {
     public class TransactionManager : ITransactionService
     {
-        public bool TransferMoney(int fromAccountId, int toAccountId, decimal amount)
+        public bool TransferMoney(int fromAccountId, int toAccountId, decimal amount, string description = "")
         {
             if (amount <= 0)
                 throw new ArgumentException("Transfer edilecek miktar pozitif olmalıdır.");
 
             try
             {
-                // Önce gönderici hesaptan para çek
+                // 1. Para göndericiden çekilir
                 AccountDataAccess.Withdraw(fromAccountId, amount);
 
-                // Sonra alıcı hesaba para yatır
+                // 2. Alıcıya aktarılır
                 AccountDataAccess.Deposit(toAccountId, amount);
 
-                // Log kaydı
-                TransactionsDataAccess.InsertTransaction(fromAccountId, amount, "Transfer");
-                LogsDataAccess.InsertLog($"Hesap {fromAccountId} → {toAccountId} {amount} ₺ transfer edildi.");
+                // 3. Transaction kaydı
+                TransactionsDataAccess.InsertTransaction(fromAccountId, toAccountId, amount, description, DateTime.Now);
+
+                // 4. Log kaydı
+                LogsDataAccess.InsertLog($"Hesap {fromAccountId} → {toAccountId} arasında {amount} ₺ transfer edildi. Açıklama: {description}");
 
                 return true;
             }
             catch (Exception ex)
             {
                 LogsDataAccess.InsertLog($"Transfer hatası: {ex.Message}");
+                MessageBox.Show("Gerçek hata: " + ex.Message);  // ← Bunu ekle
                 return false;
             }
+
         }
+
+
 
         public List<string> GetTransactionHistory(int accountId)
         {

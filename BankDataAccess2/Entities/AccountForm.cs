@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BankDataAccess2.DataAccess;
 
 namespace BankDataAccess2.Entities
 {
@@ -17,6 +18,7 @@ namespace BankDataAccess2.Entities
         {
             InitializeComponent();
         }
+
 
         private void AccountForm_Load(object sender, EventArgs e)
         {
@@ -49,9 +51,9 @@ namespace BankDataAccess2.Entities
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtClientID.Text, out int clientId) ||
-                !decimal.TryParse(txtBalance.Text, out decimal balance))
+                !decimal.TryParse(txtAmount.Text.Trim(), out decimal balance))
             {
-                MessageBox.Show("Geçersiz giriş.");
+                MessageBox.Show("Geçerli müşteri no ve bakiye girin.");
                 return;
             }
 
@@ -59,6 +61,7 @@ namespace BankDataAccess2.Entities
             {
                 AccountDataAccess.InsertAccount(clientId, balance);
                 MessageBox.Show("Hesap başarıyla eklendi.");
+                btnListAccounts_Click(null, null);
             }
             catch (Exception ex)
             {
@@ -69,20 +72,87 @@ namespace BankDataAccess2.Entities
         private void btnListAccounts_Click(object sender, EventArgs e)
         {
             lstAccounts.Items.Clear();
-
-            try
+            var accounts = AccountDataAccess.GetAllAccounts();
+            foreach (var acc in accounts)
             {
-                var accounts = AccountDataAccess.GetAllAccounts();
-                foreach (var acc in accounts)
-                    lstAccounts.Items.Add(acc);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Hesaplar alınamadı: " + ex.Message);
+                lstAccounts.Items.Add(acc);
             }
         }
 
+
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeleteAccount_Click(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtAccountID.Text.Trim(), out int accountId))
+            {
+                MessageBox.Show("Geçerli hesap no girin.");
+                return;
+            }
+
+            try
+            {
+                AccountDataAccess.DeleteAccount(accountId);
+                MessageBox.Show("Hesap silindi.");
+                btnListAccounts_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message);
+            }
+        }
+
+        private void btnDeposit_Click(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtAccountID.Text.Trim(), out int accountId) ||
+                !decimal.TryParse(txtAmount.Text.Trim(), out decimal amount))
+            {
+                MessageBox.Show("Geçerli hesap no ve tutar girin.");
+                return;
+            }
+
+            try
+            {
+                AccountDataAccess.Deposit(accountId, amount);
+                MessageBox.Show("Para yatırıldı.");
+                btnListAccounts_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message);
+            }
+        }
+
+        private void btnWithdraw_Click(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtAccountID.Text.Trim(), out int accountId) ||
+                !decimal.TryParse(txtAmount.Text.Trim(), out decimal amount))
+            {
+                MessageBox.Show("Geçerli hesap no ve tutar girin.");
+                return;
+            }
+
+            try
+            {
+                AccountDataAccess.Withdraw(accountId, amount);
+                MessageBox.Show("Para çekildi.");
+                btnListAccounts_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message);
+            }
+        }
+
+        private void txtAccountID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlTop_Paint(object sender, PaintEventArgs e)
         {
 
         }
