@@ -17,7 +17,7 @@ namespace BankDataAccess2.DataAccess
 
         public static void InsertUser(string fullName, string username, string password)
         {
-            MessageBox.Show(connStr);
+          //  MessageBox.Show(connStr);
 
            
 

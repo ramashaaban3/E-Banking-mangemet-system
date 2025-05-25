@@ -60,6 +60,7 @@
             this.lstClients.Name = "lstClients";
             this.lstClients.Size = new System.Drawing.Size(264, 132);
             this.lstClients.TabIndex = 2;
+            this.lstClients.SelectedIndexChanged += new System.EventHandler(this.lstClients_SelectedIndexChanged);
             // 
             // btnSil
             // 
