@@ -91,13 +91,14 @@ CREATE TABLE Transactions (
 
 
 
+
  Görev 3
  
- LoginForm
+👤🔐LoginForm
 
 LoginForm, kullanıcının sisteme giriş yapmasını sağlayan ilk formdur.Kullanıcı adı ve şifre bilgisi girilerek, sistemde kayıtlı kullanıcı bilgileriyle doğrulama yapılır.
 
-Yapılanlar:
+☑Yapılanlar:
 -Kullanıcının Username ve Password girişi sağlandı.
 -UserDataAccess.GetUserByUsername(username) fonksiyonu ile veritabanından kullanıcı bilgisi çekildi.
 -Giriş başarılıysa sistemde sonraki forma (ClientForm) yönlendirme yapıldı.
@@ -115,11 +116,11 @@ Entities (UI) katmanında yer alır.
 Arka planda DataAccess katmanı ile iletişim kurar.
 
 
-ClientForm
+👥ClientForm
 
 ClientForm, sistemdeki müşterilerin eklenmesini, güncellenmesini, silinmesini ve aranmasını sağlar.
 
-Yapılanlar:
+☑Yapılanlar:
 -txtClientName ve txtPhone aracılığıyla kullanıcıdan veri alındı.
 -ClientManager aracılığıyla Add, Update, Delete, Get işlemleri sağlandı.
 -ListBox kontrolüyle sistemdeki tüm müşteriler listelendi.
@@ -139,11 +140,11 @@ Entities (UI) katmanında yer alır.
 
 
 
-AccountForm
+👤AccountForm
 
 AccountForm, müşteri hesaplarının oluşturulmasını, silinmesini, bakiye güncellemelerini (yatırma/çekme) ve listelemeyi sağlar.
 
-Yapılanlar:
+☑Yapılanlar:
 -txtClientID, txtAccountID, txtAmount alanları ile kullanıcı girişi sağlandı.
 -Yeni hesap ekleme, hesap silme, para yatırma ve çekme işlemleri eklendi.
 -ListBox ile tüm hesaplar listelendi.
@@ -161,11 +162,11 @@ Entities (UI) katmanında bulunur.
 
 
 
-TransactionForm
+📲💰🔁TransactionForm
 
 TransactionForm, hesaplar arası para transferi yapmayı ve belirli bir hesaba ait işlem geçmişini görüntülemeyi sağlar.
 
-Yapılanlar:
+☑Yapılanlar:
 -txtSenderAccount, txtReceiverAccount, txtAmount, txtDescription alanları kullanılarak transfer gerçekleştirildi.
 -TransactionManager.TransferMoney() ile işlem sırasıyla Withdraw, Deposit ve InsertTransaction adımlarını takip etti.
 -Transfer işleminden sonra açıklama (description) ve işlem tarihiyle birlikte veritabanına kayıt yapıldı.
