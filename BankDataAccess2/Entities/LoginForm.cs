@@ -15,6 +15,7 @@ namespace BankDataAccess2.Entities
 {
     public partial class LoginForm: Form
     {
+        // Formun kurucu metodu (initialize işlemleri yapılır)
         public LoginForm()
         {
             InitializeComponent();
