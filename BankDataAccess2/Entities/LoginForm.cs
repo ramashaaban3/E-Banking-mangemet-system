@@ -18,25 +18,29 @@ namespace BankDataAccess2.Entities
         // Formun kurucu metodu (initialize işlemleri yapılır)
         public LoginForm()
         {
-            InitializeComponent();
+            InitializeComponent();    // Form bileşenleri başlatılır
         }
 
+        // Giriş butonuna tıklanınca çalışacak olan event
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            // Kullanıcı adı ve şifre textBox'lardan alınır
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
 
+            // Kullanıcı veritabanından sorgulanır
             var user = UserDataAccess.GetUserByUsername(username);
 
+            // Kullanıcı bulunduysa ve şifre doğruysa
             if (user.Username != null && user.Password == password)
             {
-                MessageBox.Show("Giriş başarılı!");
-                // Örn: yeni formu aç
-                this.Hide();
-                new ClientForm().Show(); // veya ana menü
+                MessageBox.Show("Giriş başarılı!");        // Başarılı giriş mesajı
+                this.Hide();                               // Mevcut giriş formunu gizle
+                new ClientForm().Show();                   // ClientForm (Müşteri Formu) açılır
             }
             else
             {
+                // Kullanıcı adı veya şifre yanlışsa hata mesajı gösterilir
                 MessageBox.Show("Hatalı kullanıcı adı veya şifre!");
             }
         }
