@@ -87,8 +87,99 @@ CREATE TABLE Transactions (
  var users = UserDataAccess.GetAllUsers();
 
  Hazırlayan: Rama SHAABAN :)
+
+
+
+
+ Görev 3
  
+ LoginForm
+
+LoginForm, kullanıcının sisteme giriş yapmasını sağlayan ilk formdur.Kullanıcı adı ve şifre bilgisi girilerek, sistemde kayıtlı kullanıcı bilgileriyle doğrulama yapılır.
+
+Yapılanlar:
+-Kullanıcının Username ve Password girişi sağlandı.
+-UserDataAccess.GetUserByUsername(username) fonksiyonu ile veritabanından kullanıcı bilgisi çekildi.
+-Giriş başarılıysa sistemde sonraki forma (ClientForm) yönlendirme yapıldı.
+-Hatalı girişlerde bilgilendirici mesaj kutuları eklendi.
 
  
+Kullanılan Teknolojiler:
+  C# (.NET Framework)
+  Windows Forms
+  SQL Server (LocalDB)
+  ADO.NET ile veritabanı bağlantısı
 
- 
+Projedeki Katmanı:
+Entities (UI) katmanında yer alır.
+Arka planda DataAccess katmanı ile iletişim kurar.
+
+
+ClientForm
+
+ClientForm, sistemdeki müşterilerin eklenmesini, güncellenmesini, silinmesini ve aranmasını sağlar.
+
+Yapılanlar:
+-txtClientName ve txtPhone aracılığıyla kullanıcıdan veri alındı.
+-ClientManager aracılığıyla Add, Update, Delete, Get işlemleri sağlandı.
+-ListBox kontrolüyle sistemdeki tüm müşteriler listelendi.
+-Arama butonu ile isim bazlı müşteri sorgulama gerçekleştirildi.
+-Butonlara hover (üzerine gelince renk değişimi) efektleri eklendi.
+
+Kullanılan Teknolojiler:
+  C# (.NET Framework)
+  Windows Forms
+  SQL Server (LocalDB)
+  Katmanlı Mimari
+  ADO.NET
+
+Projedeki Katmanı:
+Entities (UI) katmanında yer alır.
+İş mantığı BusinessLayer üzerinden, veri erişimi ise DataAccess katmanı ile sağlanır.
+
+
+
+AccountForm
+
+AccountForm, müşteri hesaplarının oluşturulmasını, silinmesini, bakiye güncellemelerini (yatırma/çekme) ve listelemeyi sağlar.
+
+Yapılanlar:
+-txtClientID, txtAccountID, txtAmount alanları ile kullanıcı girişi sağlandı.
+-Yeni hesap ekleme, hesap silme, para yatırma ve çekme işlemleri eklendi.
+-ListBox ile tüm hesaplar listelendi.
+-Her işlem sonrası btnListAccounts_Click çağrılarak anlık güncel liste sağlandı.
+
+Kullanılan Teknolojiler:
+  C# (.NET Framework)
+  Windows Forms
+  SQL Server (LocalDB)
+  ADO.NET (Manual SQL Queries)
+
+Projedeki Katmanı:
+Entities (UI) katmanında bulunur.
+İşlem mantığı AccountDataAccess sınıfı üzerinden veritabanı ile etkileşim kurar.
+
+
+
+TransactionForm
+
+TransactionForm, hesaplar arası para transferi yapmayı ve belirli bir hesaba ait işlem geçmişini görüntülemeyi sağlar.
+
+Yapılanlar:
+-txtSenderAccount, txtReceiverAccount, txtAmount, txtDescription alanları kullanılarak transfer gerçekleştirildi.
+-TransactionManager.TransferMoney() ile işlem sırasıyla Withdraw, Deposit ve InsertTransaction adımlarını takip etti.
+-Transfer işleminden sonra açıklama (description) ve işlem tarihiyle birlikte veritabanına kayıt yapıldı.
+-btnListTransactions_Click ile belirli bir hesap için işlem geçmişi getirildi.
+
+Kullanılan Teknolojiler:
+  C# (.NET Framework)
+  Windows Forms
+  SQL Server (LocalDB)
+  ADO.NET
+  Katmanlı mimari
+  Exception ve loglama yönetimi
+
+Projedeki Katmanı:
+Entities (UI) katmanında bulunur.
+İş mantığı TransactionManager (BusinessLayer) sınıfında tanımlıdır.
+Veri işlemleri AccountDataAccess ve TransactionsDataAccess üzerinden yürütülür.
