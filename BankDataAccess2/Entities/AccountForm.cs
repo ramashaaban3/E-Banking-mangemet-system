@@ -14,6 +14,7 @@ namespace BankDataAccess2.Entities
 {
     public partial class AccountForm: Form
     {
+        // Formun constructor'ı. Form yüklendiğinde arayüz bileşenlerini başlatır.
         public AccountForm()
         {
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace BankDataAccess2.Entities
         {
 
         }
-
+        // Hesap nesnesi için yardımcı sınıf
         public class Account
         {
             public int AccountID { get; set; }
@@ -38,18 +39,22 @@ namespace BankDataAccess2.Entities
 
         }
 
+        // Ekle butonuna mouse gelince arka plan rengi değişir.
         private void btnAddAccount_MouseEnter(object sender, EventArgs e)
         {
             btnAddAccount.BackColor = Color.RoyalBlue;
         }
+
+        // Mouse ayrıldığında varsayılan renge döner.
         private void btnAddAccount_MouseLeave(object sender, EventArgs e)
         {
             btnAddAccount.BackColor = ColorTranslator.FromHtml("#007ACC");
         }
 
-
+        // Yeni hesap ekleme işlemi
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
+            // Kullanıcıdan alınan değerler parse ediliyor
             if (!int.TryParse(txtClientID.Text, out int clientId) ||
                 !decimal.TryParse(txtAmount.Text.Trim(), out decimal balance))
             {
@@ -59,9 +64,10 @@ namespace BankDataAccess2.Entities
 
             try
             {
+                // Veritabanına hesap eklenir
                 AccountDataAccess.InsertAccount(clientId, balance);
                 MessageBox.Show("Hesap başarıyla eklendi.");
-                btnListAccounts_Click(null, null);
+                btnListAccounts_Click(null, null);        // Liste güncellenir
             }
             catch (Exception ex)
             {
@@ -69,13 +75,14 @@ namespace BankDataAccess2.Entities
             }
         }
 
+        // Tüm hesapları listeler
         private void btnListAccounts_Click(object sender, EventArgs e)
         {
-            lstAccounts.Items.Clear();
-            var accounts = AccountDataAccess.GetAllAccounts();
+            lstAccounts.Items.Clear();            // Liste temizlenir
+            var accounts = AccountDataAccess.GetAllAccounts();        // Hesaplar alınır
             foreach (var acc in accounts)
             {
-                lstAccounts.Items.Add(acc);
+                lstAccounts.Items.Add(acc);                        // Listeye eklenir
             }
         }
 
@@ -85,6 +92,7 @@ namespace BankDataAccess2.Entities
 
         }
 
+        // Hesap silme işlemi
         private void btnDeleteAccount_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtAccountID.Text.Trim(), out int accountId))
@@ -97,7 +105,7 @@ namespace BankDataAccess2.Entities
             {
                 AccountDataAccess.DeleteAccount(accountId);
                 MessageBox.Show("Hesap silindi.");
-                btnListAccounts_Click(null, null);
+                btnListAccounts_Click(null, null);        // Liste güncellenir
             }
             catch (Exception ex)
             {
@@ -105,6 +113,7 @@ namespace BankDataAccess2.Entities
             }
         }
 
+        // Para yatırma işlemi
         private void btnDeposit_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtAccountID.Text.Trim(), out int accountId) ||
@@ -118,7 +127,7 @@ namespace BankDataAccess2.Entities
             {
                 AccountDataAccess.Deposit(accountId, amount);
                 MessageBox.Show("Para yatırıldı.");
-                btnListAccounts_Click(null, null);
+                btnListAccounts_Click(null, null);        // Liste güncellenir
             }
             catch (Exception ex)
             {
@@ -126,6 +135,7 @@ namespace BankDataAccess2.Entities
             }
         }
 
+        // Para çekme işlemi
         private void btnWithdraw_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtAccountID.Text.Trim(), out int accountId) ||
@@ -139,7 +149,7 @@ namespace BankDataAccess2.Entities
             {
                 AccountDataAccess.Withdraw(accountId, amount);
                 MessageBox.Show("Para çekildi.");
-                btnListAccounts_Click(null, null);
+                btnListAccounts_Click(null, null);            // Liste güncellenir
             }
             catch (Exception ex)
             {
