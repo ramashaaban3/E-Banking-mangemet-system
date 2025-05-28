@@ -14,14 +14,17 @@ namespace BankDataAccess2.Entities
 {
     public partial class TransactionForm: Form
     {
+        // Form başlatıldığında InitializeComponent çağrılır.
         public TransactionForm()
         {
             InitializeComponent();
             // btnAddTransaction.Click += btnAddTransaction_Click;
         }
 
+        // Para transferi işlemini gerçekleştiren butonun tıklanma olayı
         private void btnAddTransaction_Click(object sender, EventArgs e)
         {
+            // Gönderen ve alıcı hesap ID'lerini ve tutarı doğrula
             if (!int.TryParse(txtSenderAccount.Text.Trim(), out int senderId) ||
                 !int.TryParse(txtReceiverAccount.Text.Trim(), out int receiverId) ||
                 !decimal.TryParse(txtAmount.Text.Trim(), out decimal amount))
@@ -30,7 +33,7 @@ namespace BankDataAccess2.Entities
                 return;
             }
 
-
+            // Açıklamayı al; boşsa varsayılan bir ifade ekle
             string description = txtDescription.Text.Trim();
             if (string.IsNullOrWhiteSpace(description))
                 description = "Açıklama yok";
@@ -53,15 +56,16 @@ namespace BankDataAccess2.Entities
 
         }
 
-
+        // Belirli bir hesabın işlem geçmişini listeleyen buton olayı
         private void btnListTransactions_Click(object sender, EventArgs e)
         {
+            // Hesap numarasının geçerli olup olmadığını kontrol et
             if (!int.TryParse(txtSenderAccount.Text.Trim(), out int accountId))
             {
                 MessageBox.Show("Geçerli bir hesap numarası girin.");
                 return;
             }
-
+            // İşlem listesini temizle ve ilgili hesap için verileri çek
             lstTransactions.Items.Clear();
             var transactions = TransactionsDataAccess.GetTransactionsByAccountID(accountId);
             foreach (var t in transactions)
