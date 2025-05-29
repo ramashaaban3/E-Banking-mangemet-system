@@ -48,7 +48,10 @@ namespace BankDataAccess2.BusinessLayer
                 return;
             }
 
-            bool success = transactionService.TransferMoney(fromId, toId, amount);
+            // Açıklama üret
+            string desc = $"Hesap {fromId} → {toId} {amount} ₺ transfer edildi";
+
+            bool success = transactionService.TransferMoney(fromId, toId, amount, desc);
             if (success)
             {
                 MessageBox.Show("Transfer başarılı!");
