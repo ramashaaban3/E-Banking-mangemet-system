@@ -67,13 +67,15 @@ CREATE TABLE Logs (
 );
 
 CREATE TABLE Transactions (
- TransactionID INT PRIMARY KEY IDENTITY(1,1),
- AccountID INT,
- Amount DECIMAL(18,2),
- Type NVARCHAR(20),
- Date DATETIME DEFAULT GETDATE(),
- FOREIGN KEY (AccountID) REFERENCES Accounts(AccountID)
+    TransactionID INT PRIMARY KEY IDENTITY(1,1),
+    SenderId INT NULL,
+    ReceiverId INT NULL,
+    Amount DECIMAL(18,2) NOT NULL,
+    Date DATETIME DEFAULT GETDATE(),
+    Description NVARCHAR(200) NULL
 );
+
+
  </details>
 
 
