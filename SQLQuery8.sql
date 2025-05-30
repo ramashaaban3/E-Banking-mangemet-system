@@ -1,0 +1,1 @@
+﻿UPDATE Accounts SET Balance = 500 WHERE AccountID = 2

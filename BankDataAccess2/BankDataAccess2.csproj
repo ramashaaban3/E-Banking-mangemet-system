@@ -77,10 +77,10 @@
       <DependentUpon>TransactionManagerTest.cs</DependentUpon>
     </Compile>
     <Compile Include="BusinessLayer\UserManager.cs" />
-    <Compile Include="ClientForm.cs">
+    <Compile Include="Entities\ClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientForm.Designer.cs">
+    <Compile Include="Entities\ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\AccountDataAccess.cs" />
@@ -142,7 +142,7 @@
     <EmbeddedResource Include="BusinessLayer\TransactionManagerTest.resx">
       <DependentUpon>TransactionManagerTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientForm.resx">
+    <EmbeddedResource Include="Entities\ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Entities\AccountForm.resx">
